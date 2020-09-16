@@ -124,7 +124,7 @@ def perform_attack(options):
     class PSOptions:
         def __init__(self):
             self.help = Falses
-    h = SMBConnection(options.target, options.target, None, options.port)
+#    h = SMBConnection(options.target, options.target, None, options.port)
 #    if options.target_machine:
 #        h.login(options.target_machine + "$", '')
 #    else:
@@ -158,7 +158,7 @@ if __name__ == '__main__':
         options.target_da = "Administrator"
 #    if not options.target_machine:
 #        options.target_machine = options.target
-    input("::")
+#    input("::")
     #dc_name = dc_name.rstrip('$') 
     perform_attack(options)
 
